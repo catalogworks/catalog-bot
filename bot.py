@@ -304,6 +304,8 @@ def tweet_sale(record, id, contract_address, event):
   if event == 'market':
     currency = get_currency(record['media']['askEvents'][0]['currency'])
     price = int(record['media']['askEvents'][0]['amount']) / 10**currency[1]
+    if price == 0: 
+      price = int(record['media']['bidEvents'][0]['amount']) / 10**currency[1]
     currency = currency[0]
   elif event == 'asks':
     currency = get_currency(record['v3Events'][0]['details']['askCurrency'])

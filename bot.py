@@ -66,10 +66,20 @@ def get_catalog_record(id, contract_address):
         askEvents(order_by: {blockNumber: desc}) {
           ...AskEventFragment
         }
+        bidEvents(order_by: {blockNumber: desc}) {
+          ...BidEventFragment
+        }
       }
       fragment AskEventFragment on MarketAskEvent {
         amount
         currency
+      }
+      fragment BidEventFragment on MarketBidEvent {
+        amount
+        currency {
+          decimals
+          symbol
+        }
       }
       fragment V3Event on Event {
         details
